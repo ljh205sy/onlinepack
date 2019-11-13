@@ -11,11 +11,11 @@ public class UserNotExistException extends RuntimeException {
 
     private static final long serialVersionUID = -6112780192479692859L;
 
-    private String id;
+    private String username;
 
-    public UserNotExistException(String id) {
+    public UserNotExistException(String username) {
         super("user not exist");
-        this.id = id;
+        this.username = username;
     }
 
 

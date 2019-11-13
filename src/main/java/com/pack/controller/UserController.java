@@ -9,7 +9,6 @@ import com.pack.service.impl.UserService;
 import com.pack.uilts.Result;
 import com.pack.uilts.ResultCodeEnum;
 import com.pack.uilts.ResultUtil;
-import com.pack.vo.DepartmentVO;
 import com.pack.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,11 +18,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -31,7 +36,7 @@ import java.util.Set;
  * @Author: liujinhui
  * @Date: 2019/11/8 22:51
  */
-@RestController
+@Controller
 @RequestMapping("/v1/user")
 @Api(tags = "用户管理")
 public class UserController {
@@ -49,6 +54,7 @@ public class UserController {
      */
     @ApiOperation(value = "用户新增", notes = "用户新增", hidden = false)
     @PostMapping
+    @ResponseBody
     public Result<Boolean> saveUser(@RequestBody(required = true) UserVO userVO) {
         User user = new User();
         BeanUtils.copyProperties(userVO, user);
@@ -64,7 +70,7 @@ public class UserController {
 
         // 新增角色
         Set<Role> roles = userVO.getRoles();
-        if(roles != null && !roles.isEmpty()) {
+        if (roles != null && !roles.isEmpty()) {
             user.setRoles(roles);
         }
 
@@ -72,6 +78,7 @@ public class UserController {
         return ResultUtil.success(true);
     }
 
+    @ResponseBody
     @PutMapping
     @ApiOperation(value = "用户修改", notes = "用户修改", hidden = false)
     public Result<Boolean> updateUser(@Valid @RequestBody UserVO userVO, BindingResult errors) {
@@ -79,6 +86,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userid}")
+    @ResponseBody
     @ApiOperation(value = "用户删除", notes = "删除用户", hidden = false)
     public Result<Boolean> delete(@PathVariable @ApiParam("用户id") String userid) {
         try {
@@ -96,6 +104,7 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "使用ID查询用户")
+    @ResponseBody
     @GetMapping("/{userid}")
     public Result<UserVO> getUserById(@ApiParam("用户id") @PathVariable("userid") String id) {
         User user = userService.findById(id);
@@ -105,5 +114,21 @@ public class UserController {
         return ResultUtil.success(userVO);
     }
 
-
+    @ApiOperation(value = "查询所有用户")
+    @ResponseBody
+    @GetMapping
+    public Result<List<UserVO>> getUsers() {
+        int pageNum = 1;
+        int size = 17;
+        Pageable pageable = PageRequest.of(pageNum - 1, size);
+        Page<User> pageAll = userService.findAll(pageable);
+        List<User> content = pageAll.getContent();
+        List<UserVO> list = new ArrayList<>();
+        for (User user : pageAll) {
+            UserVO userVO = new UserVO();
+            BeanUtils.copyProperties(user, userVO);
+            list.add(userVO);
+        }
+        return ResultUtil.success(list);
+    }
 }

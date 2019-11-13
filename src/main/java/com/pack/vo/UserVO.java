@@ -21,8 +21,8 @@ import java.util.Set;
  */
 @Data
 @Api(tags = "用户信息")
-public class UserVO implements Serializable {
-    @ApiModelProperty(value="用户guid",required=true)
+public class UserVO extends  BaseUserVO implements Serializable {
+    @ApiModelProperty(value="用户guid")
     private String guid;
     @ApiModelProperty(value="用户账号",required=true)
     private String account;

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>首页</title>
+</head>
+<body>
+<dev>
+    <form method="post" action="/v1/user">
+        <table>
+            <tr>
+                <td>用户账号:</td>
+                <td>
+                    <input type="text" name="account"/>
+                </td>
+
+                <td>用户密码:</td>
+                <td>
+                    <input type="password" name="password"/>
+                <td>用户名称:</td>
+                <td>
+                    <input type="text" name="name"/>
+                </td>
+                <td >
+                    <input type="submit" value="提交"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</dev>
+<table border="1">
+    <tr>
+        <th>用户账号</th>
+        <th>用户密码</th>
+        <th>用户名称</th>
+        <th>状态变量：index</th>
+        <th>状态变量：count</th>
+        <th>状态变量：size</th>
+        <!--<th>状态变量：current.userName</th>-->
+        <th>状态变量：even</th>
+        <th>状态变量：odd</th>
+        <th>状态变量：first</th>
+        <th>状态变量：last</th>
+    </tr>
+    <tr th:each="user,userStat : ${items}">
+        <td th:text="${user.account}">Onions</td>
+        <td th:text="${user.name}">test@test.com.cn</td>
+        <td th:text="${user.password}">test@test.com.cn</td>
+        <th th:text="${userStat.index}">状态变量：index</th>
+        <th th:text="${userStat.count}">状态变量：count</th>
+        <th th:text="${userStat.size}">状态变量：size</th>
+        <!--<th th:text="${userStat.current.userName}">状态变量：current</th>-->
+        <th th:text="${userStat.even}">状态变量：even****</th>
+        <th th:text="${userStat.odd}">状态变量：odd</th>
+        <th th:text="${userStat.first}">状态变量：first</th>
+        <th th:text="${userStat.last}">状态变量：last</th>
+    </tr>
+</table>
+</body>
+</html>
