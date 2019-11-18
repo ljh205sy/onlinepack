@@ -28,3 +28,6 @@ spring:
 logging:
   level:
     io.swagger.models.parameters.AbstractSerializableParameter: error
+    com.pack: INFO
+    root: WARN
+    org.hibernate.type: TRACE
