@@ -44,7 +44,7 @@ public class DepartmentController {
      */
     @ApiOperation(value = "部门新增", notes = "部门新增", hidden = false)
     @PostMapping
-    public Result<Boolean> saveDepartment(@RequestBody(required = true) DepartmentVO departmentVO) {
+    public Result<Boolean> save(@RequestBody(required = true) DepartmentVO departmentVO) {
         Department department = new Department();
 
         // 父节点为空
@@ -70,8 +70,8 @@ public class DepartmentController {
      */
     @PutMapping
     @ApiOperation(value = "部门修改", notes = "部门修改", hidden = false)
-    public Result<Boolean> updateDepartment(@Valid @RequestBody DepartmentVO departmentVO, BindingResult errors) {
-        return this.saveDepartment(departmentVO);
+    public Result<Boolean> update(@Valid @RequestBody DepartmentVO departmentVO, BindingResult errors) {
+        return this.save(departmentVO);
     }
 
     /**

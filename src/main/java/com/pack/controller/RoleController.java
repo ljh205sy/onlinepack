@@ -42,7 +42,7 @@ public class RoleController {
      */
     @ApiOperation(value = "角色新增", notes = "角色新增", hidden = false)
     @PostMapping
-    public Result<RoleVO> saveRole(@RequestBody(required = true) RoleVO roleVO) {
+    public Result<RoleVO> save(@RequestBody(required = true) RoleVO roleVO) {
         Role role = new Role();
         BeanUtils.copyProperties(roleVO, role);
         // 新增角色
@@ -64,8 +64,8 @@ public class RoleController {
 
     @PutMapping
     @ApiOperation(value = "角色修改", notes = "角色修改", hidden = false)
-    public Result<RoleVO> updateRole(@Valid @RequestBody RoleVO roleVO, BindingResult errors) {
-        return this.saveRole(roleVO);
+    public Result<RoleVO> update(@Valid @RequestBody RoleVO roleVO, BindingResult errors) {
+        return this.save(roleVO);
     }
 
     @DeleteMapping("/{roleid}")

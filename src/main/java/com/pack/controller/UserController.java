@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +54,7 @@ public class UserController {
     @ApiOperation(value = "用户新增", notes = "用户新增", hidden = false)
     @PostMapping
     @ResponseBody
-    public Result<Boolean> saveUser(@RequestBody(required = true) UserVO userVO) {
+    public Result<Boolean> save(@RequestBody(required = true) UserVO userVO) {
         User user = new User();
         BeanUtils.copyProperties(userVO, user);
 
@@ -81,8 +80,8 @@ public class UserController {
     @ResponseBody
     @PutMapping
     @ApiOperation(value = "用户修改", notes = "用户修改", hidden = false)
-    public Result<Boolean> updateUser(@Valid @RequestBody UserVO userVO, BindingResult errors) {
-        return this.saveUser(userVO);
+    public Result<Boolean> update(@Valid @RequestBody UserVO userVO, BindingResult errors) {
+        return this.save(userVO);
     }
 
     @DeleteMapping("/{userid}")

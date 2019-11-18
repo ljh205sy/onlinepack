@@ -3,11 +3,6 @@ package com.pack.swagger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Created by ${huipei.x} on 2017-11-10.
- */
-
-
 @Configuration
 @ConfigurationProperties(prefix = "springfox")
 public class SwaggerProperties {

@@ -13,7 +13,6 @@ import java.util.Set;
  * @Date: 2019/11/9 16:56
  */
 @Entity
-@Data
 public class Role {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -54,16 +53,76 @@ public class Role {
                , inverseJoinColumns = {@JoinColumn(name = "resource_id", referencedColumnName = "guid")})
     private Set<Resource> resources = new HashSet<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(guid, role.guid);
+
+    public String getGuid() {
+        return guid;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(guid);
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+    public String getRolename() {
+        return rolename;
+    }
+
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public String getCreateuserid() {
+        return createuserid;
+    }
+
+    public void setCreateuserid(String createuserid) {
+        this.createuserid = createuserid;
+    }
+
+    public Boolean getSystemrole() {
+        return systemrole;
+    }
+
+    public void setSystemrole(Boolean systemrole) {
+        this.systemrole = systemrole;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(Set<Resource> resources) {
+        this.resources = resources;
     }
 }

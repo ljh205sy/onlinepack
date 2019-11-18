@@ -2,7 +2,6 @@ package com.dudu;
 
 import com.pack.OnlinepackApplication;
 import com.pack.entity.User;
-import com.pack.repository.RoleRepository;
 import com.pack.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = OnlinepackApplication.class)
+@Transactional
+@Rollback(false)
 public class UserControllerTests {
 
     @Autowired

@@ -14,7 +14,6 @@ import java.util.Set;
  */
 
 @Entity
-@Data
 @Table(name = "department")
 public class Department {
     @Id
@@ -63,6 +62,55 @@ public class Department {
                 ", aliasname='" + aliasname + '\'' +
                 ", note='" + note + '\'' +
                 '}';
+    }
+
+
+    public String getDepartmentid() {
+        return departmentid;
+    }
+
+    public void setDepartmentid(String departmentid) {
+        this.departmentid = departmentid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAliasname() {
+        return aliasname;
+    }
+
+    public void setAliasname(String aliasname) {
+        this.aliasname = aliasname;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Department getPdepartment() {
+        return pdepartment;
+    }
+
+    public void setPdepartment(Department pdepartment) {
+        this.pdepartment = pdepartment;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }
 

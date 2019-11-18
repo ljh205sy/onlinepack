@@ -13,7 +13,6 @@ import java.util.Set;
  * @Date: 2019/11/9 16:56
  */
 @Entity
-@Data
 public class Resource {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -50,16 +49,100 @@ public class Resource {
     @ManyToMany(mappedBy = "resources")
     private Set<Role> roles = new HashSet<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Resource resource = (Resource) o;
-        return Objects.equals(guid, resource.guid);
+
+    public String getGuid() {
+        return guid;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(guid);
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+    public String getFuncname() {
+        return funcname;
+    }
+
+    public void setFuncname(String funcname) {
+        this.funcname = funcname;
+    }
+
+    public String getFuncnameEn() {
+        return funcnameEn;
+    }
+
+    public void setFuncnameEn(String funcnameEn) {
+        this.funcnameEn = funcnameEn;
+    }
+
+    public Resource getPresource() {
+        return presource;
+    }
+
+    public void setPresource(Resource presource) {
+        this.presource = presource;
+    }
+
+    public int getTypeid() {
+        return typeid;
+    }
+
+    public void setTypeid(int typeid) {
+        this.typeid = typeid;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

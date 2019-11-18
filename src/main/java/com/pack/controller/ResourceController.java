@@ -46,7 +46,7 @@ public class ResourceController {
      */
     @ApiOperation(value = "资源新增", notes = "资源新增", hidden = false)
     @PostMapping
-    public Result<Boolean> saveResource(@RequestBody(required = true) ResourceVO resourceVO) {
+    public Result<Boolean> save(@RequestBody(required = true) ResourceVO resourceVO) {
         Resource resource = new Resource();
         BeanUtils.copyProperties(resourceVO, resource);
         // 父节点为空
@@ -71,7 +71,7 @@ public class ResourceController {
     @PutMapping
     @ApiOperation(value = "资源修改", notes = "资源修改", hidden = false)
     public Result<Boolean> updateResource(@Valid @RequestBody ResourceVO resourceVO, BindingResult errors) {
-        return this.saveResource(resourceVO);
+        return this.save(resourceVO);
     }
 
     /**

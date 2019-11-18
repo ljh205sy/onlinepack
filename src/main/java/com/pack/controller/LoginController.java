@@ -8,15 +8,13 @@ import com.pack.uilts.Result;
 import com.pack.uilts.ResultCodeEnum;
 import com.pack.uilts.ResultUtil;
 import com.pack.vo.UserVO;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +30,7 @@ import java.util.Optional;
  */
 @Controller
 @RequestMapping
+@Api(tags = "登录管理")
 public class LoginController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

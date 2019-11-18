@@ -12,17 +12,19 @@ spring:
     loginUsername: vap
     loginPassword: vap
   jpa:
-    generate-ddl: false
+    generate-ddl: true # 自动创建表结构
     show-sql: true
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: html5
-    encoding: utf-8
+#  thymeleaf:
+#    cache: false
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    mode: html5
+#    encoding: utf-8o
 
 
-
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
