@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     username: ${MYSQL_USER:root}
-    password: ${MYSQL_PASSWORD:123456}
-    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/jpa_cloud?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=UTF-8
+    password: ${MYSQL_PASSWORD:mysql}
+    url: jdbc:mysql://${MYSQL_HOST:192.168.119.242}:${MYSQL_PORT:3306}/jpa_cloud?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=UTF-8
     maxActive: 20
     initialSize: 1
     minIdle: 1

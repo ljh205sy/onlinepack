@@ -1,6 +1,6 @@
 package com.dudu;
 
-import com.pack.OnlinepackApplication;
+import com.pack.PackApplication;
 import com.pack.entity.Module;
 import com.pack.repository.ModuleRepository;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = OnlinepackApplication.class)
+@ContextConfiguration(classes = PackApplication.class)
 public class ModuleRepositoryTests {
 
     @Autowired

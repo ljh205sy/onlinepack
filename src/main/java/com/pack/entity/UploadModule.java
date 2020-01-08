@@ -25,7 +25,7 @@ public class UploadModule implements Serializable {
     @Column(name = "guid")
     private String guid;
 
-    @Column(name="module_id", length = 255, nullable = false)
+    @Column(name = "module_id", length = 255, nullable = false)
     private String moduleId;
 
     @Column(name = "module_version", nullable = false, length = 255)
@@ -49,9 +49,18 @@ public class UploadModule implements Serializable {
     @OneToMany(mappedBy = "uploadModule")
     private Set<UploadModuleDependency> uploadDependencys = new HashSet<>();
 
-    public UploadModule(){}
+    // 单向多对多， 一个需求可能由多个模块解决。  一个模块可以解决多个需求。 由模块上传维护需求关系
+    // joinColumn， 中间表t_uploadmodule_demand，   外键列upload_module_guid， 外键列：demand_guid
+    @ManyToMany
+    @JoinTable(name = "t_uploadmodule_demand",
+            joinColumns = @JoinColumn(name = "upload_module_guid"),
+            inverseJoinColumns = @JoinColumn(name="demand_guid"))
+    private Set<Demand> demands = new HashSet<>();
 
-    public UploadModule(String guid){
+    public UploadModule() {
+    }
+
+    public UploadModule(String guid) {
         this.guid = guid;
     }
 

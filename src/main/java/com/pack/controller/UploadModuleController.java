@@ -1,5 +1,6 @@
 package com.pack.controller;
 
+import com.pack.entity.Demand;
 import com.pack.entity.UploadModule;
 import com.pack.entity.UploadModuleDependency;
 import com.pack.service.impl.UploadModuleDependencyService;
@@ -7,6 +8,7 @@ import com.pack.service.impl.UploadModuleService;
 import com.pack.uilts.Result;
 import com.pack.uilts.ResultCodeEnum;
 import com.pack.uilts.ResultUtil;
+import com.pack.vo.DemandVO;
 import com.pack.vo.UploadModuleDependencyVO;
 import com.pack.vo.UploadModuleVO;
 import io.swagger.annotations.Api;
@@ -22,10 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: liujinhui
@@ -76,7 +75,7 @@ public class UploadModuleController {
             });
         }
 
-        // TODO , 由多的一方来维护关系， 上传模块不进行cascade模块及版本信息表
+        // TODO , 由多的一方来维护关系（模块依赖关系）， 上传模块不进行cascade模块及版本信息表
         Set<UploadModuleDependency> dependencys = new HashSet<>();
         if (uploadDependencys != null && !uploadDependencys.isEmpty()) {
             Iterator<UploadModuleDependencyVO> iterator = uploadModuleVO.getUploadDependencys().iterator();
@@ -89,6 +88,21 @@ public class UploadModuleController {
             }
             uploadModule.setUploadDependencys(dependencys);
         }
+        // TODO 模块上传时，关联的需求也需要存储， 一个模块可以解决多个需求。一个需求需要多个模块进行交互处理
+        Set<Demand> demands = new HashSet<>();
+        Set<DemandVO> demandvos = uploadModuleVO.getDemands();
+        if (demandvos != null && !demandvos.isEmpty()) {
+            Iterator<DemandVO> iterator = demandvos.iterator();
+            while (iterator.hasNext()) {
+                DemandVO source = iterator.next();
+                Demand target = new Demand();
+                BeanUtils.copyProperties(source, target);
+                demands.add(target);
+            }
+            uploadModule.setDemands(demands);
+        }
+
+
         uploadModuleService.save(uploadModule);
         uploadModuleDependencyService.save(dependencys);// 由多的一方来维护，上传模块与模块、版本之间的关系
         return ResultUtil.success(true);
@@ -122,6 +136,7 @@ public class UploadModuleController {
     @ApiOperation(value = "上传模块删除", notes = "上传模块删除", hidden = false)
     public Result<Boolean> delete(@PathVariable @ApiParam("上传模块guid") String guid) {
         try {
+            // 删除模块依赖
             UploadModuleDependency temp = new UploadModuleDependency(new UploadModule(guid));
             List<UploadModuleDependency> all = uploadModuleDependencyService.findAll(temp);
             all.stream().forEach(s -> {

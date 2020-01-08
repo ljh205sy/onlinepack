@@ -21,4 +21,5 @@ public class UploadModuleVO implements Serializable {
     private Timestamp createTime;
     private String createUser;
     private Set<UploadModuleDependencyVO> uploadDependencys;
+    private Set<DemandVO> demands;
 }

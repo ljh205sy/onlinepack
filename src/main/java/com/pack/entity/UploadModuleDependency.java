@@ -9,6 +9,7 @@ import java.util.Objects;
 /**
  * @Author: liujinhui
  * @Date: 2019/11/16 21:51
+ * @desc  上传模块需要哪些模块依赖及版本
  */
 @Entity
 @Data
@@ -23,7 +24,6 @@ public class UploadModuleDependency {
     private String relativeModuleId;
     @Column(name = "relative_module_version", nullable = true, length = 255)
     private String relativeModuleVersion;
-
     @ManyToOne
     @JoinColumn(name = "upload_module_id")
     private UploadModule uploadModule;
